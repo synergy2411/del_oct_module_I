@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Storage</title>
+</head>
+<body>
+    <h1>Favorate Color</h1>
+    <input type="text" list="favColors" id="favColor" name="favColor">
+    <datalist name="favColor" id="favColors">
+        <option value="red">Red</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+    </datalist>
+    <button id="btnSelect">Select</button>
+    <button id="btnClear">Clear</button>
+
+    <script>
+        var btnClear = document.getElementById("btnClear");
+        btnClear.addEventListener("click", function(){
+            if(localStorage.length > 0){
+                localStorage.clear()
+                alert("local storage cleared")
+            }else{
+                alert("No item to delete")
+            }
+        })
+        if(localStorage.getItem("favColor")){
+            document.body.style.backgroundColor = localStorage.getItem("favColor")
+        }
+
+        var btnSelect = document.getElementById("btnSelect")
+        var favColor = document.getElementById("favColor")
+        btnSelect.addEventListener("click", function(){
+            // console.log(favColor.value)
+            localStorage.setItem("favColor", favColor.value)
+        })
+    </script>
+</body>
+</html>
+
