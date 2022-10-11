@@ -1,0 +1,54 @@
+ /* * {
+        color: blue;
+        margin: 20px;
+        font-size: 20px;
+      } */
+
+      html,
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #container-id {
+        font-size: 1.2em;
+        margin-left: 10%;
+      }
+      .container-two {
+        margin-left: 30%;
+      }
+      .container {
+        margin-left: 20%;
+        margin-right: 20%;
+      }
+      a:link{
+        color: green;
+      }
+      a:visited{
+        font-size: 24px;
+        color: tomato;
+      }
+      a:hover{
+        background-color: salmon;
+      }
+      a:active{
+        background-color: blue;
+      }
+      /* LVHA */
+      li:first-child{
+        color: red;
+      }
+      li:last-child{
+        text-decoration: underline;
+      }
+      li:nth-child(even){
+        background-color: green;
+      }
+      p::first-letter{
+        font-size: 40px;
+      }
+      p~span{
+        color : salmon;
+      }
+      h6{
+        font-size: 30px;
+      }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+</head>
+<body>
+    
+    <form>
+        <label for="username">Username : </label>
+        <input type="text" name="username" id="username" />
+        <br />
+        <label for="password"> Password : </label>
+        <input type="password" name="password" id="password" />
+        <br />
+        <input type="submit" value="Login" id="btnSubmit">
+    </form>
+
+    <script>
+        var username = document.querySelector("#username")
+        var password = document.getElementById("password")
+        var btnSubmit = document.querySelector("#btnSubmit")
+
+        // username.addEventListener("keyup", function(event){
+        //     console.log(event.target.value)
+        // })
+        btnSubmit.addEventListener("click", function(event){
+            event.preventDefault();
+            if(username.value.trim() === ""){
+                alert("Username is madatory field");
+                return;
+            }else if(!username.value.includes("@")){
+                alert("Username must have @ sign");
+                return;
+            }
+            console.log("Username :", username.value)
+            console.log("Password :", password.value)
+            var paragraphEl = document.createElement("p")
+            paragraphEl.innerText = "Username : " + username.value;
+            document.body.appendChild(paragraphEl)
+        })
+    </script>
+
+</body>
+</html>
