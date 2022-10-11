@@ -1,0 +1,27 @@
+ul{
+    list-style: none;
+    top: 20px;
+}
+li{
+    display: inline;
+    margin-right: 14px;
+    padding: 18px 20px;
+}
+li:hover{
+    background-color: antiquewhite;
+}
+ul li a {
+    color: #12345f;
+    font-size: 18px;
+    font-family: sans-serif;
+    text-decoration: none;
+}
+#container{
+    width: 200px;
+    border: 3px red solid;
+    margin: 12px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* 200+3 + 3 + 8 +8 */

@@ -3,6 +3,13 @@ var password = document.getElementById("password")
 var btnSubmit = document.querySelector("#btnSubmit")
 var errorMessageParagraph = document.createElement("p");
 
+var courses = document.getElementById("courses")
+var emotions = document.getElementsByClassName("emotions")
+
+// var buttons = document.getElementsByTagName("button")
+
+// buttons[0].addEventListener
+
 username.addEventListener("blur", function(){
     if(username.value.trim() === ""){
         username.classList.add("invalid")
@@ -20,6 +27,13 @@ username.addEventListener("blur", function(){
 
 btnSubmit.addEventListener("click", function(event){
     event.preventDefault();
+    var resultArray = [];
+    for(var i =0; i< emotions.length; i++){
+        if(emotions[i].checked){
+            resultArray.push(emotions[i].name)
+        }
+    }
+    console.log(resultArray)
     var paragraphEl = document.createElement("p")
     paragraphEl.innerText = "Username : " + username.value + "\nPassword : " + password.value;
     document.body.appendChild(paragraphEl)
