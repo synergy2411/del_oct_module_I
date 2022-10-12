@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swapping</title>
+    <style>
+      .before-drag {
+        border: 3px black solid;
+        background-color: goldenrod;
+      }
+      .after-drag {
+        border: 3px grey dotted;
+        background-color: gold;
+      }
+      .block {
+        width: 200px;
+        height: 80px;
+        margin: 10px;
+        text-align: center;
+      }
+      .container {
+        display: flex;
+        justify-content: space-around;
+      }
+      body {
+        width: 800px;
+        margin: 0px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="block before-drag" draggable="true">A</div>
+      <div class="block before-drag" draggable="true">B</div>
+      <div class="block before-drag" draggable="true">C</div>
+    </div>
+    <script>
+      var blocks = document.getElementsByClassName("block");
+      var sourceEl = null;
+
+      for (var i = 0; i < blocks.length; i++) {
+        blocks[i].addEventListener("dragstart", onDragStart);
+        blocks[i].addEventListener("dragover", onDragOver);
+        blocks[i].addEventListener("drop", onDrop);
+      }
+
+      function onDragStart(event) {
+        sourceEl = event.target;
+        event.dataTransfer.setData("text", event.target.innerText);
+      }
+      function onDragOver(event) {
+        event.preventDefault();
+        if (sourceEl !== event.target) {
+          event.target.classList.remove("before-drag");
+          event.target.classList.add("after-drag");
+        }
+      }
+      function onDrop(event) {
+        if (sourceEl !== event.target) {
+          sourceEl.innerText = event.target.innerText;
+          event.target.innerText = event.dataTransfer.getData("text");
+        }
+        event.target.classList.add("before-drag");
+        event.target.classList.remove("after-drag");
+      }
+    </script>
+  </body>
+</html>
