@@ -7,9 +7,11 @@ var socket = new Server({
 
 socket.on("request", function (request) {
     var connection = request.accept(null, request.origin)
+    console.log(request)
     connection.on("message", function (message) {
         console.log("Message : " + message.utf8Data)
         socket.broadcast(message.utf8Data);
+
     })
     connection.on("close", function () {
         console.log("Client disconnected")

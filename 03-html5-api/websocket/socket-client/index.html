@@ -19,6 +19,7 @@
 
     <script>
       if ("WebSocket" in window) {
+        var chatterName = prompt("Enter your name pls");
         var socket = new WebSocket("ws://localhost:9090");
 
         var btnSend = document.getElementById("btnSend");
@@ -27,11 +28,14 @@
 
         btnSend.addEventListener("click", function (event) {
           event.preventDefault();
+          console.log(socket);
           socket.send(txtMsg.value);
+          txtMsg.value = "";
         });
         socket.addEventListener("message", function (message) {
           taMsg.value += message.data + "\n";
         });
+
         socket.addEventListener("open", function () {
           console.log("You are connected now");
         });
