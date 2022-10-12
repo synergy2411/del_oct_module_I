@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket Client</title>
+  </head>
+  <body>
+    <form>
+      <!-- textarea -->
+      <textarea readonly name="taMsg" id="taMsg" cols="30" rows="10"></textarea>
+      <br />
+      <!-- text field -->
+      <input type="text" name="txtMsg" id="txtMsg" />
+      <!-- Send button -->
+      <button id="btnSend">Send</button>
+    </form>
+
+    <script>
+      if ("WebSocket" in window) {
+        var socket = new WebSocket("ws://localhost:9090");
+
+        var btnSend = document.getElementById("btnSend");
+        var txtMsg = document.getElementById("txtMsg");
+        var taMsg = document.getElementById("taMsg");
+
+        btnSend.addEventListener("click", function (event) {
+          event.preventDefault();
+          socket.send(txtMsg.value);
+        });
+        socket.addEventListener("message", function (message) {
+          taMsg.value += message.data + "\n";
+        });
+        socket.addEventListener("open", function () {
+          console.log("You are connected now");
+        });
+        socket.addEventListener("error", function (ev) {
+          console.log(ev);
+        });
+      } else {
+        alert("Socket is not supported");
+      }
+    </script>
+  </body>
+</html>
