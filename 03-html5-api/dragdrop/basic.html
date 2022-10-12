@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drag Drop</title>
+    <style>
+      #container {
+        width: 400px;
+        height: 400px;
+      }
+      img {
+        width: 200px;
+        height: 200px;
+      }
+      .main {
+        display: flex;
+      }
+      .dragstart {
+        background-color: lightgrey;
+        border: 2px black dotted;
+      }
+      .beforeDrag {
+        background-color: #fff;
+        border: 1px black solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div id="container" class="beforeDrag"></div>
+      <img
+        src="https://picsum.photos/200"
+        id="dragable-image"
+        draggable="true"
+      />
+    </div>
+    <script>
+      var container = document.getElementById("container");
+      var img = document.getElementById("dragable-image");
+
+      img.addEventListener("dragstart", function (event) {
+        event.dataTransfer.setData("text", event.target.id);
+      });
+      img.addEventListener("dragend", function () {
+        // console.log("Drag End");
+      });
+      container.addEventListener("dragenter", function () {
+        container.classList.remove("beforeDrag");
+        container.classList.add("dragstart");
+        console.log("Drag Enter");
+      });
+      container.addEventListener("dragover", function (event) {
+        event.preventDefault();
+        // console.log("Drag Over");
+      });
+      container.addEventListener("drop", function (event) {
+        event.dataTransfer.dropEffect = "move";
+        var imageId = event.dataTransfer.getData("text");
+        event.target.appendChild(document.getElementById(imageId));
+        container.classList.remove("dragstart");
+        container.classList.add("beforeDrag");
+      });
+    </script>
+  </body>
+</html>
