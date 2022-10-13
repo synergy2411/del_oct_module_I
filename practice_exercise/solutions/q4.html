@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <title>My Player</title>
+    <style>
+      body {
+        width: 500px;
+        margin: 0 auto;
+      }
+      video {
+        width: 500px;
+      }
+      .btn {
+        background-color: rgb(117, 126, 24);
+        padding: 2px 8px;
+      }
+      span {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      input[type="range"] {
+        width: 110px;
+      }
+    </style>
+  </head>
+  <body>
+    <video controls>
+      <source
+        src="https://www.w3resource.com/html-css-exercise/big_buck_bunny.mp4"
+      />
+      <source
+        src="https://www.w3resource.com/html-css-exercise/big_buck_bunny.ogv "
+      />
+    </video>
+    <br />
+    <div class="controls">
+      <button class="btn btn-fast-rewind">
+        <span class="material-symbols-outlined"> fast_rewind </span>
+      </button>
+      <button class="btn btn-play">
+        <span class="material-symbols-outlined"> play_arrow </span>
+      </button>
+      <button class="btn btn-pause">
+        <span class="material-symbols-outlined"> pause </span>
+      </button>
+      <button class="btn btn-fast-forward">
+        <span class="material-symbols-outlined"> fast_forward </span>
+      </button>
+
+      <button class="btn btn-replay">
+        <span class="material-symbols-outlined"> replay </span>
+      </button>
+
+      <input type="range" class="btn" min="0" step="0.5" max="60" id="slider" />
+
+      <span id="time-elapsed">00:00</span> /
+      <span id="total-duration">00:00</span>
+    </div>
+    <script>
+      var btnPlay = document.querySelector(".btn-play");
+      var btnPause = document.querySelector(".btn-pause");
+      var btnReplay = document.querySelector(".btn-replay");
+      var btnFastForward = document.querySelector(".btn-fast-forward");
+      var btnFastRewind = document.querySelector(".btn-fast-rewind");
+      var timeElapsed = document.querySelector("#time-elapsed");
+      var totalDuration = document.querySelector("#total-duration");
+
+      var slider = document.querySelector("#slider");
+      var videoEl = document.querySelector("video");
+
+      function setSlider() {
+        slider.value = videoEl.currentTime;
+      }
+      setSlider();
+      btnPause.disabled = true;
+      videoEl.addEventListener("canplay", function (event) {
+        if (event.target.duration) {
+          totalDuration.innerText = event.target.duration.toFixed(2).toString();
+        }
+      });
+      videoEl.addEventListener("timeupdate", function () {
+        timeElapsed.innerText = videoEl.currentTime.toFixed(2);
+      });
+      slider.addEventListener("change", function (event) {
+        videoEl.currentTime = this.value;
+        videoEl.play();
+        btnPause.disabled = false;
+        btnPlay.disabled = true;
+      });
+      btnFastForward.addEventListener("click", function () {
+        videoEl.currentTime += videoEl.duration / 10;
+        setSlider();
+      });
+      btnFastRewind.addEventListener("click", function () {
+        videoEl.currentTime -= videoEl.duration / 10;
+        setSlider();
+      });
+      btnReplay.addEventListener("click", function () {
+        videoEl.currentTime = 0;
+        videoEl.play();
+        btnPause.disabled = false;
+        btnPlay.disabled = true;
+        setSlider();
+      });
+      btnPlay.addEventListener("click", function () {
+        if (videoEl.paused) {
+          videoEl.play();
+          btnPause.disabled = false;
+          btnPlay.disabled = true;
+        }
+      });
+      btnPause.addEventListener("click", function () {
+        if (!videoEl.paused) {
+          videoEl.pause();
+          btnPause.disabled = true;
+          btnPlay.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
