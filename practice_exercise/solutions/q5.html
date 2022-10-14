@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drag Drop</title>
+    <style>
+      body {
+        width: 500px;
+        margin: 0 auto;
+        font-family: sans-serif;
+        text-align: center;
+      }
+      .container {
+        display: flex;
+        justify-content: space-around;
+      }
+      .box {
+        width: 200px;
+        border: 3px solid rgb(70, 68, 68);
+        border-radius: 8px;
+        font-size: 12px;
+      }
+      .alphabets {
+        width: 180px;
+        border: 1px solid grey;
+        margin: auto;
+        text-align: center;
+        margin-top: 6px;
+        margin-bottom: 6px;
+        color: #fff;
+        padding: 3px;
+      }
+      .second-box {
+        background-color: rgb(102, 173, 232);
+      }
+      .first {
+        background-color: maroon;
+      }
+      .second {
+        background-color: #fff;
+        color: rgb(48, 44, 44);
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Let's Play</h1>
+    <div class="container">
+      <div class="box first-box">
+        <div class="alphabets first" id="d" draggable="true">D</div>
+        <div class="alphabets first" id="p" draggable="true">P</div>
+        <div class="alphabets first" id="w" draggable="true">W</div>
+        <div class="alphabets first" id="o" draggable="true">O</div>
+        <div class="alphabets first" id="g" draggable="true">G</div>
+        <div class="alphabets first" id="k" draggable="true">K</div>
+        <div class="alphabets first" id="u" draggable="true">U</div>
+        <div class="alphabets first" id="e" draggable="true">E</div>
+        <div class="alphabets first" id="h" draggable="true">H</div>
+        <div class="alphabets first" id="m" draggable="true">M</div>
+        <div class="alphabets first" id="c" draggable="true">C</div>
+        <div class="alphabets first" id="s" draggable="true">S</div>
+      </div>
+      <div class="box second-box">
+        <div class="alphabets second">
+          B / <span class="val" id="C">---</span> / D
+        </div>
+        <div class="alphabets second">
+          G / <span class="val" id="H">---</span> / I
+        </div>
+        <div class="alphabets second">
+          J / <span class="val" id="K">---</span> / L
+        </div>
+        <div class="alphabets second">
+          C / <span class="val" id="D">---</span> / E
+        </div>
+        <div class="alphabets second">
+          L / <span class="val" id="M">---</span> / N
+        </div>
+        <div class="alphabets second">
+          O / <span class="val" id="P">---</span> / q
+        </div>
+        <div class="alphabets second">
+          R / <span class="val" id="S">---</span> / T
+        </div>
+        <div class="alphabets second">
+          T / <span class="val" id="U">---</span> / V
+        </div>
+        <div class="alphabets second">
+          V / <span class="val" id="W">---</span> / X
+        </div>
+        <div class="alphabets second">
+          D / <span class="val" id="E">---</span> / F
+        </div>
+        <div class="alphabets second">
+          F / <span class="val" id="G">---</span> / H
+        </div>
+        <div class="alphabets second">
+          N / <span class="val" id="O">---</span> / P
+        </div>
+      </div>
+    </div>
+    <script>
+      var firstContainerBoxes = document.querySelectorAll(".first");
+      var secondContainerBoxes = document.querySelectorAll(".second");
+      var spanResult = document.getElementsByClassName("val");
+
+      for (var i = 0; i < firstContainerBoxes.length; i++) {
+        firstContainerBoxes[i].addEventListener("dragstart", onDragStart);
+      }
+      function onDragStart(event) {
+        event.dataTransfer.setData("text", event.target.id);
+      }
+
+      for (var i = 0; i < secondContainerBoxes.length; i++) {
+        secondContainerBoxes[i].addEventListener("dragover", onDragOver);
+        secondContainerBoxes[i].addEventListener("drop", onDrop);
+      }
+      function onDrop(event) {
+        var sourceId = event.dataTransfer.getData("text");
+        for (var i = 0; i < spanResult.length; i++) {
+          if (spanResult[i].id.toLowerCase() === sourceId.toLowerCase()) {
+            spanResult[i].innerText = sourceId.toUpperCase();
+            document.getElementById(sourceId).remove();
+          }
+        }
+      }
+      function onDragOver(event) {
+        event.preventDefault();
+      }
+    </script>
+  </body>
+</html>
