@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <!-- input -->
+      <label for="email">Email : </label>
+      <input type="text" name="email" id="email" />
+      <!-- select -->
+      <br />
+      <label for="country">Country :</label>
+      <select name="country" id="country">
+        <option value=""></option>
+        <option value="india">INDIA</option>
+        <option value="europe">EUROPE</option>
+        <option value="usa">USA</option>
+      </select>
+      <br />
+      <!-- radio -->
+      <label for="role">Role : </label>
+      <input type="radio" name="role" class="role" value="admin" /> Admin
+      <input type="radio" name="role" class="role" value="employee" /> Employee
+      <br />
+      <!-- check -->
+      <label for="hobbies">Hobbies :</label>
+      <input type="checkbox" value="swimming" class="hobbies" />Swimming
+      <input type="checkbox" value="yoga" class="hobbies" />Yoga
+      <input type="checkbox" value="cricket" class="hobbies" />Cricket
+      <ul id="hobby-lists"></ul>
+      <!-- button -->
+      <input type="submit" value="Submit Form" id="btnSubmit" />
+    </form>
+
+    <script>
+      var email = document.getElementById("email");
+      var country = document.getElementById("country");
+      var roles = document.querySelectorAll(".role");
+      var hobbies = document.querySelectorAll(".hobbies");
+
+      var btnSubmit = document.getElementById("btnSubmit");
+      var errors = [];
+
+      btnSubmit.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        // Checkbox validation
+        var hobbiesResult = [];
+
+        for (var i = 0; i < hobbies.length; i++) {
+          if (hobbies[i].checked) {
+            hobbiesResult.push(hobbies[i].value);
+          }
+        }
+
+        for (var i = 0; i < hobbiesResult.length; i++) {
+          var li = document.createElement("li");
+          li.innerHTML = hobbiesResult[i];
+          document.getElementById("hobby-lists").appendChild(li);
+        }
+
+        // radio button validation
+        // var flag = false;
+        // var selectedRole = "";
+        // for (var i = 0; i < roles.length; i++) {
+        //   if (roles[i].checked) {
+        //     flag = true;
+        //     selectedRole = roles[i].value;
+        //   }
+        // }
+
+        // if (!flag) {
+        //   errors.push("Role should be selected");
+        // } else {
+        //   errors = [];
+        //   errors.push("Selected Role  : " + selectedRole);
+        // }
+
+        // select box validation
+
+        // if (country.value.trim() === "") {
+        //   errors.push("Country Should be selected");
+        // }
+
+        // input email validation
+        // if (email.value.trim() === "") {
+        //   errors.push("Email Should not be empty");
+        // } else if (!email.value.includes("@")) {
+        //   errors.push("Email should be in proper format");
+        // } else {
+        //   errors = [];
+        // }
+        if (errors.length > 0) {
+          for (var i = 0; i < errors.length; i++) {
+            var paragraphEl = document.createElement("p");
+            paragraphEl.id = "para1";
+            paragraphEl.innerHTML = errors[i];
+            document.body.append(paragraphEl);
+          }
+        } else {
+          //   document.getElementById("para1").remove();
+        }
+      });
+    </script>
+  </body>
+</html>
